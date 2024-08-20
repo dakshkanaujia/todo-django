@@ -2,10 +2,18 @@ from django.db import models
 
 # Create your models here.
 class Todo(models.Model):
-    title = models.CharField(max_length=120)
-    description = models.TextField()
+    CATEGORY_CHOICES = [
+        ('Work', 'Work'),
+        ('Personal', 'Personal'),
+        ('Shopping', 'Shopping'),
+        # Add more categories if needed
+    ]
+
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
     completed = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='Work')
 
     def __str__(self):
         return self.title
